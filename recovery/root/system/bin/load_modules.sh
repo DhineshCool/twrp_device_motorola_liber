@@ -1,24 +1,18 @@
 #!/system/bin/sh
 
 module_path=/vendor/lib/modules
-
-touch_class_path=/sys/class/touchscreen
-touch_path=
 firmware_path=/vendor/firmware
-firmware_file=
-device=$(getprop ro.boot.device)
+touch_class_path=/sys/class/touchscreen
+firmware_file=focaltech-ft8756-0d-0000-liber.bin
 
 wait_for_poweron()
 {
-	local wait_nomore
-	local readiness
-	local count
-	wait_nomore=60
-	count=0
+	local wait_nomore=10
+	local count=0
 	while true; do
-		readiness=$(cat $touch_path/poweron)
-		if [ "$readiness" == "1" ]; then
-			break;
+		readiness=$(cat "$touch_path/poweron" 2>/dev/null)
+		if [ "$readiness" = "1" ]; then
+			break
 		fi
 		count=$((count+1))
 		[ $count -eq $wait_nomore ] && break
@@ -30,31 +24,24 @@ wait_for_poweron()
 	return 0
 }
 
-# Load all needed modules
-insmod $module_path/sensors_class.ko
-insmod $module_path/fpc1020_mmi.ko
-insmod $module_path/goodix_fod_mmi.ko
-insmod $module_path/utags.ko
-insmod $module_path/exfat.ko
-insmod $module_path/mmi_annotate.ko
-insmod $module_path/mmi_info.ko
-insmod $module_path/mmi_sys_temp.ko
-insmod $module_path/moto_f_usbnet.ko
-insmod $module_path/snd_smartpa_aw882xx.ko
-insmod $module_path/focaltech_0flash_mmi.ko
+# Load optional modules (most liber drivers are built into the kernel)
+for module in fpc1020_mmi.ko fpsensor_spi_tee.ko; do
+	[ -f "$module_path/$module" ] && insmod "$module_path/$module" 2>/dev/null
+done
 
-cd $firmware_path
-touch_product_string=$(ls $touch_class_path)
-insmod $module_path/aw8646.ko
-firmware_file="focaltech-ft8756-0d-0000-liber.bin"
+# Reflash the touch controller firmware when the driver exposes the sysfs nodes
+if [ -d "$touch_class_path" ] && [ -d "$firmware_path" ]; then
+	touch_product_string=$(ls "$touch_class_path" 2>/dev/null | head -n 1)
+	if [ -n "$touch_product_string" ] && [ -f "$touch_class_path/$touch_product_string/path" ]; then
+		touch_path=/sys$(cat "$touch_class_path/$touch_product_string/path" | awk '{print $1}')
+		if [ -d "$touch_path" ] && [ -f "$firmware_path/$firmware_file" ]; then
+			wait_for_poweron
+			echo "$firmware_file" > "$touch_path/doreflash" 2>/dev/null
+			echo 1 > "$touch_path/forcereflash" 2>/dev/null
+			sleep 5
+			echo 1 > "$touch_path/reset" 2>/dev/null
+		fi
+	fi
+fi
 
-
-touch_path=/sys$(cat $touch_class_path/$touch_product_string/path | awk -Fliber '{print $1}')
-wait_for_poweron
-echo $firmware_file > $touch_path/doreflash
-echo 1 > $touch_path/forcereflash
-sleep 5
-echo 1 > $touch_path/reset
-
-return 0
-
+exit 0
