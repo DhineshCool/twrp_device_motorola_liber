@@ -46,6 +46,9 @@ on fs
     start load_modules
 
 on post-fs
+    start boot-hal-1-2
+
+on post-fs && property:init.svc.boot-hal-1-2=stopped
     start boot-hal-1-1
 
 on property:ro.crypto.type=file

@@ -36,7 +36,6 @@ PRODUCT_PACKAGES += \
     update_verifier
 
 PRODUCT_PACKAGES += \
-    bootctrl.$(PRODUCT_PLATFORM) \
     update_engine_sideload
 
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -52,11 +51,16 @@ TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
+    android.hardware.boot@1.2-impl-qti \
+    android.hardware.boot@1.2-impl-qti.recovery \
     android.hardware.boot@1.1-impl-qti \
     android.hardware.boot@1.1-impl-qti.recovery \
     android.hardware.boot@1.1-service \
     bootctrl.$(PRODUCT_PLATFORM) \
     bootctrl.$(PRODUCT_PLATFORM).recovery
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
