@@ -83,10 +83,4 @@ if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     # Build flags
     export ALLOW_MISSING_DEPENDENCIES=true
     export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-
-    # Register lunch combos if supported
-    if type add_lunch_combo >/dev/null 2>&1; then
-        add_lunch_combo twrp_liber-eng
-        add_lunch_combo fox_liber-eng
-    fi
 fi
