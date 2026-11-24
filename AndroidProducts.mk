@@ -12,4 +12,6 @@ PRODUCT_MAKEFILES := \
 
 COMMON_LUNCH_CHOICES := \
     twrp_liber-eng \
-    fox_liber-eng
+    twrp_liber-userdebug \
+    fox_liber-eng \
+    fox_liber-userdebug

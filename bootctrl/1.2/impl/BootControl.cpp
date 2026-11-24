@@ -30,6 +30,8 @@
 #define LOG_TAG "android.hardware.boot@1.2-impl-qti"
 
 #include <memory>
+#include <string.h>
+#include <cstring>
 
 #include <log/log.h>
 
