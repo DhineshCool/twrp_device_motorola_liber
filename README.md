@@ -19,7 +19,17 @@ Front Camera | 16 MP (f/2.0)
 ![Device Picture](https://fdn2.gsmarena.com/vv/pics/motorola/motorola-one-fusion-plus-1.jpg)
 
 ## Kernel Source
-Prebuilt kernel from https://github.com/menorziin/kernel_motorola_liber
+
+The prebuilt kernel, DTB and touch/fingerprint modules in `prebuilt/` and
+`recovery/root/vendor/lib/modules/` are taken from the Cybertron v19 kernel
+(`4.14.357-openela`, built for the current Android 17 LineageOS tree):
+
+- Kernel source: https://github.com/cool585/android_kernel_motorola_sm6150 (branch `v19`)
+- AnyKernel3 package: https://github.com/DhineshCool/AnyKernel3
+
+When the installed ROM/firmware changes, regenerate these prebuilts from the
+same kernel build. The old `4.14.190` kernel and its out-of-tree modules do not
+boot on current firmware and must not be mixed with the v19 kernel.
 
 ## Compile
 
@@ -38,7 +48,7 @@ Then add to a local manifest (if you don't have .repo/local_manifest then make t
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <project name="osm0sis/twrp_abtemplate" path="bootable/recovery/installer" remote="github" revision="master"/>
-  <project name="android_device_motorola_liber" path="device/motorola/liber" remote="TeamWin" revision="android-12.1"/>
+  <project name="DhineshCool/twrp_device_motorola_liber" path="device/motorola/liber" remote="github" revision="android-12.1"/>
 </manifest>
 ```
 
