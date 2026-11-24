@@ -20,8 +20,8 @@ Front Camera | 16 MP (f/2.0) Pop-up motorized
 
 ## Kernel & Decryption Notes
 
-- **Kernel:** Prebuilt Cybertron v19 kernel (`4.14.357-openela`) with matching DTB and DTBO, built from:
-  - Source: https://github.com/cool585/android_kernel_motorola_sm6150
+- **Kernel:** Prebuilt Cybertron v20.5 kernel (`4.14.357-openela`) with matching DTB and DTBO, built from:
+  - Source: https://github.com/cool585/android_kernel_motorola_sm6150 (branch `v20.5`)
   - In-tree drivers: Touch, display, and sensors are compiled directly into the kernel image.
 - **Decryption:** Supports File-Based Encryption (FBE v2) metadata encryption with `wrappedkey_v0` on Android 12 through Android 17.
 - **Keymaster:** Uses Qualcomm Keymaster 4.1 HAL service (`android.hardware.keymaster@4.1-service-qti`) with required `libspl.so` and `libspcom.so` libraries.
