@@ -18,4 +18,5 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_liber.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_liber-eng
+    twrp_liber-eng \
+    twrp_liber-userdebug

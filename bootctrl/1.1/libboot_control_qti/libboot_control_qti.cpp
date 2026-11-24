@@ -680,18 +680,23 @@ MergeStatus get_snapshot_merge_status()
 
 int get_active_boot_slot()
 {
-	int slot = 0;
+	int slot = -1;
 	char bootPartition[MAX_GPT_NAME_SIZE + 1] = {0};
 
 	for (int i = 0; slot_suffix_arr[i] != NULL; i++) {
 		snprintf(bootPartition, sizeof(bootPartition) - 1,
 			"boot%s", slot_suffix_arr[i]);
 
-			if (get_partition_attribute(bootPartition,
-				ATTR_SLOT_ACTIVE) == 1) {
-				slot = i;
-				break;
-			}
+		if (get_partition_attribute(bootPartition,
+			ATTR_SLOT_ACTIVE) == 1) {
+			slot = i;
+			break;
+		}
+	}
+
+	if (slot < 0) {
+		ALOGW("%s: No active slot found via partition attribute, falling back to current slot", __func__);
+		slot = get_current_slot();
 	}
 
 	if (boot_control_check_slot_sanity(slot) != 0) {

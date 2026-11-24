@@ -752,6 +752,11 @@ int gpt_utils_is_ufs_device()
 {
     char bootdevice[PROPERTY_VALUE_MAX] = {0};
     property_get("ro.boot.bootdevice", bootdevice, "N/A");
+    if (!strcmp(bootdevice, "N/A") || strlen(bootdevice) == 0) {
+        property_get("ro.boot.boot_devices", bootdevice, "N/A");
+    }
+    if (strstr(bootdevice, ".ufshc"))
+        return 1;
     if (strlen(bootdevice) < strlen(".ufshc") + 1)
         return 0;
     return (!strncmp(&bootdevice[strlen(bootdevice) - strlen(".ufshc")],

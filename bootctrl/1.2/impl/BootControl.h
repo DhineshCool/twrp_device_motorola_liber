@@ -29,6 +29,8 @@
 
 #pragma once
 
+#include <string.h>
+#include <cstring>
 #include <android/hardware/boot/1.2/IBootControl.h>
 #include <hidl/MQDescriptor.h>
 #include <hidl/Status.h>
