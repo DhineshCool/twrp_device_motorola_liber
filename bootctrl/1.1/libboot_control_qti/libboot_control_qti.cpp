@@ -460,7 +460,8 @@ unsigned get_number_slots()
 		if (de->d_name[0] == '.')
 			continue;
 		if (!strncmp(de->d_name, BOOT_IMG_PTN_NAME,
-					strlen(BOOT_IMG_PTN_NAME)))
+					strlen(BOOT_IMG_PTN_NAME)) &&
+		    strlen(de->d_name) > strlen(BOOT_IMG_PTN_NAME))
 			slot_count++;
 	}
 	closedir(dir_bootdev);
