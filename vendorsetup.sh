@@ -27,7 +27,7 @@ fi
 if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export FOX_BUILD_DEVICE="liber"
     export OF_MAINTAINER="DhineshCool"
-    export FOX_VERSION="R12.1_0"
+    export FOX_MAINTAINER_PATCH_VERSION="1"
     export FOX_BUILD_TYPE="Unofficial"
 
     # Target device aliases
