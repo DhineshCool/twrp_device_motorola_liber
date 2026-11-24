@@ -32,7 +32,6 @@ if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
     # Target device aliases
     export FOX_TARGET_DEVICES="liber,liber_retail"
-    export OF_TARGET_DEVICES="liber,liber_retail"
     export TARGET_DEVICE_ALT="liber_retail"
 
     # Screen & Display (1080x2340, 19.5:9, full pop-up screen without notch)
@@ -50,7 +49,6 @@ if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
     # A/B & Recovery partition configuration
     export FOX_AB_DEVICE=1
-    export OF_AB_DEVICE=1
     export OF_AB_DEVICE_WITH_RECOVERY_PARTITION=1
     export FOX_RECOVERY_INSTALL_PARTITION="/dev/block/bootdevice/by-name/recovery"
 
