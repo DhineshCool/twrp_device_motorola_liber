@@ -21,15 +21,15 @@ Front Camera | 16 MP (f/2.0)
 ## Kernel Source
 
 The prebuilt kernel, DTB and touch/fingerprint modules in `prebuilt/` and
-`recovery/root/vendor/lib/modules/` are taken from the Cybertron v19 kernel
+`recovery/root/vendor/lib/modules/` are taken from the Cybertron v20.5 kernel
 (`4.14.357-openela`, built for the current Android 17 LineageOS tree):
 
-- Kernel source: https://github.com/cool585/android_kernel_motorola_sm6150 (branch `v19`)
+- Kernel source: https://github.com/cool585/android_kernel_motorola_sm6150 (branch `v20.5`)
 - AnyKernel3 package: https://github.com/DhineshCool/AnyKernel3
 
 When the installed ROM/firmware changes, regenerate these prebuilts from the
 same kernel build. The old `4.14.190` kernel and its out-of-tree modules do not
-boot on current firmware and must not be mixed with the v19 kernel.
+boot on current firmware and must not be mixed with the v20.5 kernel.
 
 ## Compile
 
