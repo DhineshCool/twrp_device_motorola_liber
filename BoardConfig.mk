@@ -249,6 +249,7 @@ OF_CLOCK_POS := 1
 OF_ALLOW_DISABLE_NAVBAR := 1
 OF_FLASHLIGHT_ENABLE := 1
 OF_FL_PATH1 := /sys/class/leds/led:torch_0
+OF_FL_PATH2 := /sys/class/leds/led:switch_0
 OF_USE_GREEN_LED := 0
 OF_AB_DEVICE_WITH_RECOVERY_PARTITION := 1
 OF_MAINTAINER := DhineshCool

@@ -45,6 +45,7 @@ if [ "$1" = "$FDEVICE" ] || [ "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     # Flashlight & LEDs
     export OF_FLASHLIGHT_ENABLE=1
     export OF_FL_PATH1="/sys/class/leds/led:torch_0"
+    export OF_FL_PATH2="/sys/class/leds/led:switch_0"
     export OF_USE_GREEN_LED=0
 
     # A/B & Recovery partition configuration
